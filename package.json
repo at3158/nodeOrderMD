@@ -1,0 +1,26 @@
+{
+  "name": "nodeOrderMD",
+  "version": "0.1.0",
+  "description": "nodeOrderMD",
+  "main": "hello.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "node.js",
+    "eclipse",
+    "nodeclipse"
+  ],
+  "author": "",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "ejs": "^1.0.0",
+    "express": "3.5.1",
+    "express-myconnection": "1.0.4",
+    "jade": "*",
+    "mysql": "2.2.0",
+    "moment": "~2.12.0"
+  }
+}
