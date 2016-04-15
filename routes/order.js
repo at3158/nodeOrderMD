@@ -45,6 +45,7 @@ exports.edit = function(req, res){
 
 /*Save the order*/
 exports.save = function(req,res){    
+	var no='00000';
     var input = JSON.parse(JSON.stringify(req.body));    
     req.getConnection(function (err, connection) {        
         var data = {            
@@ -54,6 +55,20 @@ exports.save = function(req,res){
         	Remark   : input.Remark
         };
         
+      var query = connection.query('SELECT CASE WHEN MAX(OrderNo) IS NULL THEN \'00001\'  ELSE   LPAD(LTRIM(CAST(SUBSTRING(MAX(OrderNo),9,5)+1 AS CHAR)),5,\'0\')    END  AS NO  FROM TBOrderM WHERE Orderdate=? ','20160412',function(err,rows)
+        {
+            if(err)
+            	{
+            	console.log("Error Selecting : %s ",err );     
+            	}               
+                
+            this.no=rows[0].NO;
+            console.log("NO : %s ",rows[0].NO ); 
+            console.log("NO : %s ",this.no ); 
+        });      
+      
+      data.OrderNo='20160415'+this.no;
+      
         var query = connection.query("INSERT INTO TBOrderM set ? ",data, function(err, rows)
         {  
           if (err)
