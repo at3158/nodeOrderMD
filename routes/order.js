@@ -2,16 +2,19 @@
 /**
  * Module dependencies.
  */
+var express = require('express');
 var moment = require('moment');
+var app = express();
 
 /*
  Set Paras
  */
 var dtnow=moment().format('YYYYMMDD');
+
+
 /*
  * GET users listing.
  */
-
 exports.list = function(req, res){
   req.getConnection(function(err,connection){       
         var query = connection.query('SELECT * FROM TBOrderM',function(err,rows)
@@ -43,6 +46,13 @@ exports.edit = function(req, res){
     }); 
 };
 
+
+exports.GET = function(req, res){
+	  res.render('GET',{page_title:"Add order - Node.js"});
+	};
+	
+
+	
 /*Save the order*/  
 exports.save = function(req,res){    
 	var no='00000';
@@ -110,5 +120,7 @@ exports.delete_order = function(req,res){
         });        
      });
 };
+
+
 
 

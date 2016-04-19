@@ -1,0 +1,54 @@
+<%- include layouts/header.ejs %>
+<!doctype html>
+<html>
+    <head>
+         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    	<title>Basic initialization</title>
+        <title><%=(locals.title) ? title :''%></title>
+    
+    </head>
+    <script src="/codebase/dhtmlxcommon.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/codebase/dhtmlxgrid.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/codebase/dhtmlxgridcell.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/codebase/dhtmlxdataprocessor.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="/codebase/dhtmlxgrid.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="/codebase/skins/dhtmlxgrid_dhx_skyblue.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+<script type="text/javascript" charset="utf-8">
+    function init() {
+        mygrid = new dhtmlXGridObject("grid_here");
+        mygrid.setImagePath("/nodeOrderMD/public/codebase/imgs/");
+        mygrid.setHeader("Sales, Author, Title, Price");
+        mygrid.setColumnIds("sales,author,title,price");
+        mygrid.setInitWidths("70,150,*,70");
+        mygrid.setColTypes("dyn,ed,ed,ed");
+        mygrid.setColSorting("int,str,str,int");
+        mygrid.setSkin("dhx_skyblue");
+        mygrid.init();
+        
+        mygrid.load("/data", "js")
+
+		var dp = new dataProcessor("/data");
+		dp.init(mygrid);
+		dp.enableDataNames(true);
+		dp.setTransactionMode("POST", false);
+    }
+</script>   
+
+    <body onload="init();">
+  			 <div class="page-data">          
+  			 	 <form >
+  			 	 	<table cellpadding="11">
+                <tr>
+                	   <td class="label">OrderNo</td><td>: <input type="text" name="OrderNo" value="111" required></td>
+                 </tr>
+                </table>
+             </div>   
+    <div id="grid_here" style="width:550px; height:150px;"></div>
+    
+        <h2>Hello world1111<h2>
+    </body>
+
+</html>
+<%- include layouts/footer.ejs %>
